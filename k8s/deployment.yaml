@@ -16,4 +16,4 @@ spec:
       - name: myshoppingapp
         image: jagdevm85/shoppingweb
         ports:
-        - containerPort: 8080
+        - containerPort: 80
