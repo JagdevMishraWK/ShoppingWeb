@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: myshoppingapp-service
+spec:
+  selector:
+    app: myshoppingapp
+  ports:
+  - port: 8087
+    protocol: TCP
+    targetPort: 8087
+  

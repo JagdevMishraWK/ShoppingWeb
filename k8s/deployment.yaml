@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: myshoppingapp
+spec:
+  selector:
+    matchLabels:
+      app: myshoppingapp
+  replicas: 2
+  template:
+    metadata:
+      labels:
+        app: myshoppingapp
+    spec:
+      containers:
+      - name: myshoppingapp
+        image: jagdevm85/shoppingweb
+        ports:
+        - containerPort: 8080
