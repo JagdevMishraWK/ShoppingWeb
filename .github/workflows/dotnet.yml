@@ -48,8 +48,13 @@ jobs:
         aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
         aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         role-to-assume: ${{ secrets.AWS_ROLE_TO_ASSUME }}
+        role-session-name: GitHubPipeline
         role-duration-seconds: 1200
         aws-region: eu-west-1
+            
+    - name: Debug
+      run: |
+          aws sts assume-role --role-arn ${{ secrets.DEV_ROLE }} --role-session-name GitHubPipeline
 
     - name: Login to Amazon ECR
       id: login-ecr
