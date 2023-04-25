@@ -1,19 +1,22 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: myshoppingapp
+  name: webappdemo
+  labels:
+    app: webappdemo
 spec:
+  replicas: 5
   selector:
     matchLabels:
-      app: myshoppingapp
-  replicas: 4
+      app: webappdemo
   template:
     metadata:
       labels:
-        app: myshoppingapp
+        app: webappdemo
     spec:
       containers:
-      - name: myshoppingapp
-        image: jagdevm85/shoppingweb
-        ports:
-        - containerPort: 80
+        - name: webappdemo
+          image: 943725333913.dkr.ecr.eu-west-1.amazonaws.com/mywebapp:latest
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 80
