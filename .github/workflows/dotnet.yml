@@ -50,6 +50,7 @@ jobs:
         role-to-assume: ${{ secrets.AWS_ROLE_TO_ASSUME }}
         role-session-name: GitHubPipeline
         role-duration-seconds: 1200
+        role-skip-session-tagging: true
         aws-region: eu-west-1
             
     - name: Debug
