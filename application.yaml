@@ -4,12 +4,10 @@ metadata:
   name: webappdemo-argo-application
   namespace: argocd
   annotations:
-    
-    
-    argocd-image-updater.argoproj.io/allocation.update-strategy: latest
-    argocd-image-updater.argoproj.io/write-back-method: git
-    argocd-image-updater.argoproj.io/write-back-target: "kustomization:/k8s"
     argocd-image-updater.argoproj.io/git-branch: main:image-updater-{{.SHA256}}
+    argocd-image-updater.argoproj.io/image-list: alias=943725333913.dkr.ecr.eu-west-1.amazonaws.com/mywebapp
+    argocd-image-updater.argoproj.io/alias.force-update: "true"
+    argocd-image-updater.argoproj.io/alias.update-strategy: latest
 spec:
   project: default
 
