@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: webappdemo
-          image: 943725333913.dkr.ecr.eu-west-1.amazonaws.com/mywebapp@sha256:c30e733d61e140520feb3baf42e24116256ab0f26dba4deab57dea436c52cacc
+          image: 943725333913.dkr.ecr.eu-west-1.amazonaws.com/mywebapp:latest
           imagePullPolicy: Always
           ports:
             - containerPort: 80

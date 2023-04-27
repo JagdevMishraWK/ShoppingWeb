@@ -67,15 +67,12 @@ jobs:
         REPOSITORY: mywebapp
         IMAGE_TAG: ${{ github.sha }}
       run: |
-        docker build --file ./ShoppingWeb/Dockerfile -t $REGISTRY/$REPOSITORY:$IMAGE_TAG .
+        #docker build --file ./ShoppingWeb/Dockerfile -t $REGISTRY/$REPOSITORY:$IMAGE_TAG .
+        docker build --file ./ShoppingWeb/Dockerfile -t $REGISTRY/$REPOSITORY:$IMAGE_TAG -t $REGISTRY/$REPOSITORY:latest .
         docker push $REGISTRY/$REPOSITORY:$IMAGE_TAG
         
     - name: Update kube config
       run: aws eks update-kubeconfig --name ${{ env.EKS_ClusterName }} --region ${{ env.AWS_REGION }}
-    
-    - name: Update deplyment
-      run: aws ecs update-service --cluster ${{ env.EKS_ClusterName }} --service k8s/service.yaml --force-new-deployment
-
     
     #- name: Deploy to EKS
     #  uses: swdotcom/update-and-apply-kubernetes-configs@v1
