@@ -73,6 +73,10 @@ jobs:
     - name: Update kube config
       run: aws eks update-kubeconfig --name ${{ env.EKS_ClusterName }} --region ${{ env.AWS_REGION }}
     
+    - name: Update deplyment
+      run: aws ecs update-service --cluster ${{ env.EKS_ClusterName }} --service k8s/service.yaml --force-new-deployment
+
+    
     #- name: Deploy to EKS
     #  uses: swdotcom/update-and-apply-kubernetes-configs@v1
     #  with:
