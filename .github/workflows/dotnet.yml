@@ -13,7 +13,7 @@ env:
   ECR_REPOSITORY: mywebapp
   AWS_ACCOUNT: '943725333913'
   AWS_REGION: eu-west-1
-  EKS_ClusterName: mywebapp-eks-cluster
+  EKS_ClusterName: myapp-eks-cluster
 
 jobs:
   build:
@@ -53,7 +53,6 @@ jobs:
       with:
         aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
         aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-        role-to-assume: arn:aws:iam::${{ env.AWS_ACCOUNT }}:role/BaseconeIaC-Role
         role-duration-seconds: 1200
         aws-region: eu-west-1
             
@@ -73,12 +72,12 @@ jobs:
     - name: Update kube config
       run: aws eks update-kubeconfig --name ${{ env.EKS_ClusterName }} --region ${{ env.AWS_REGION }}
     
-    #- name: Deploy to EKS
-    #  uses: swdotcom/update-and-apply-kubernetes-configs@v1
-    #  with:
-    #    k8-config-file-paths: |
-    #      k8s/deployment.yaml
-    #      k8s/service.yaml
-    #    replacement-method: defined
-    #  env:
-    #    IMAGE_TAG: ${{ github.sha }}
+    - name: Deploy to EKS
+      uses: swdotcom/update-and-apply-kubernetes-configs@v1
+      with:
+        k8-config-file-paths: |
+          k8s/deployment.yaml
+          k8s/service.yaml
+        replacement-method: defined
+      env:
+        IMAGE_TAG: ${{ github.sha }}
